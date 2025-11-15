@@ -8,11 +8,7 @@
 
 ## Results
 
-| Col1 | Col2 | Col3 |
-|------|------|------|
-|      |      |      |
-|      |      |      |
-|      |      |      |
+
 
 ![**Figure 1.** Description of data](Output/Fig1.svg){fig-align="center"}
 
