@@ -1,28 +1,3 @@
-# Exercise 3 Report
-
-### *Oliver E. Todreas* \| *2025-11-14*
-
-## Introduction
-
-## Statistical Analysis
-
-## Results
-
-| Col1 | Col2 | Col3 |
-|------|------|------|
-|      |      |      |
-|      |      |      |
-|      |      |      |
-
-![**Figure 1.** Description of data](Output/Fig1.svg){fig-align="center"}
-
-## Conclusions
-
-## Code
-
-The code below is a copy of the code in `Script/Analysis.R`. You may run the aforementioned file.
-
-```{r}
 # # Install libraries
 # install.packages("here")
 # install.packages("tidyverse")
@@ -79,5 +54,4 @@ data_p %>%
     strip.background = element_blank(),  # Clear background behind facet labels
     strip.placement='outside'  # Place labels outside of axis ticks
   )
-ggsave(here("Output", "Fig1.svg"), width = 1100, height = 1100, units = "px")
-```
+ggsave(here("Output", "Fig1.svg"), width = 1200, height = 1000, units = "px")
