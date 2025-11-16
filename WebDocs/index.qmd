@@ -8,9 +8,7 @@
 
 ## Results
 
-
-
-![**Figure 1.** Description of data](Output/Fig1.svg){fig-align="center"}
+![**Figure 1.** Figure description](images/Fig1.svg){fig-align="center"}
 
 ## Conclusions
 
