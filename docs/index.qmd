@@ -6,7 +6,7 @@
 
 ## Introduction
 
-Identifying the factors that influence organism growth are crucial to understanding how conditions in the wild affect ecological outcomes over generations. The aim of this study is to understand conditions that influence the larval growth rates and adult weights of *Pieris rapae*. In the data we used, mothers reared on one of two different plant genuses, *Barbarea* and *Berteroa*, and oviposited on one of those same two plants. Response metrics in offspring development were recorded.
+Identifying the factors that influence organism growth is crucial to understanding how conditions in the wild affect ecological outcomes over generations. The aim of this study is to understand conditions that influence the larval growth rates and adult weights of *Pieris rapae*. In the data we used, mothers reared on one of two different plant genuses, *Barbarea* and *Berteroa*, and oviposited on one of those same two plants. Response metrics in offspring development were recorded.
 
 We used ANOVA to analyze the extent to which the maternal host (the plant on which the mothers reared) and the larval host (the plant on which the mothers oviposited) affect larval growth rates and adult weights of *P. rapae* individuals.
 
