@@ -6,15 +6,29 @@
 
 ## Introduction
 
-Understanding the factors that contribute to organism growth can be crucial in maintaining ecological conditions in the wild. This is why we analyzed *Pieris rapae*
+Identifying the factors that influence to organism growth are crucial to understanding how conditions in the wild affect ecological outcomes over generations. The aim of this study is to understand conditions that influence the larval growth rates and adult weights of *Pieris rapae*. In the data we used, mothers reared on one of two different plants, *Barbarea* and *Berteroa*, and oviposited on one of those same two plants, after which responses in offspring development were recorded to provide insight into the above issues.
+
+We used ANOVA to analyze the extent to which the maternal host (the plant on which the mothers reared) and the larval host (the plant on which the mothers oviposited) affect larval growth rates and adult weights of *P. rapae* individuals.
 
 ## Statistical Analysis
 
+Two two-way ANOVA analyses were performed to investivate the relationship between the two factors (maternal host and larval host). We fitted a linear model to each response variable and both factors, producing one model for the effect of the factors on growth rate and one model for the effect of the factors on adult weight.
+
 ## Results
 
-![**Figure 1.** Figure description](images/Fig1.svg){fig-align="center"}
+We found that mean adult weights were higher when *Barbarea* was the larval host. For individuals with *Barbarea* larval host, their mean adult weights were 65.4 and 66.7 mg for *Barbarea* and *Berteroa* as maternal host, respectively. Meanwhile, individuals with *Berteroa* as larval host had mean adult weights of 53.5 and 50.4 mg for *Barbarea* and *Berteroa* as maternal host, respectively (Figure 1).
+
+As for growth rates, we observed a similar pattern, where individuals with *Barbarea* as larval host had the highest mean growth rates, at 0.084 and 0.078 mg/day for *Barbarea* and *Berteroa* as maternal host, respectively. Individuals with *Berteroa* as larval host had mean growth rates of 0.064 and 0.055 mg/day for *Barbarea* and *Berteroa* as maternal host, respectively (Figure 1).
+
+![**Figure 1.** For each response variable, means were higher for individuals in the *Barbarea* larval host group than for the *Berteroa* larval host group. Additionally, within maternal host groups, mean response was consistently higher for individuals within the *Barbarea* larval host group than the *Berteroa* larval host group, with the exeption of mean adult weight of individuals with *Barbarea* maternal host, where individuals with *Berteroa* larval host had the higher mean adult weight.](images/Fig1.svg){fig-align="center"}
+
+We found the effect of larval host on adult weight to be significant (*p*<0.001), while the effect of maternal host on adult weight was not significant (*p*=0.77). The interaction between the two factors was represented by *p*=0.054. Furthermore, we found the effect of larval host, maternal host, and the interaction of larval and maternal host on growth rate to be significant (*p*<0.001, *p*<0.001, *p*=0.016, respectively).
 
 ## Conclusions
+
+Following the statistical analysis presented above, it is clear that the plant a female *P. rapae* individual choses to oviposit on has a sizable impact on her offspring's growth rate, and ultimately their adult weight. Statistical analysis using ANOVA showed that it is not only the above effect that has a statistically significant impact on the responses measured, but also the effect of maternal host and the effect of the interaction of larval and maternal host on growth rates.
+
+The significance of the effect of the interaction of larval and maternal host on adult weight was not below alpha, however, it was quite close at *p*=0.054. While this cannot be said to be a statistically significant observation, it is obvious that there is quite some interaction happening, and it is indeed possible that the interaction is biologically important, even if a significant *p*-value was not observed in this case.
 
 ## Code
 
@@ -41,10 +55,10 @@ data <- as_tibble(df)
 data <- data %>% select(LarvalHost, MaternalHost, AdultWeight, GrowthRate)
 
 # Fit linear models and perform ANOVA
-m_aw <- lm(data$AdultWeight ~ data$LarvalHost * data$MaternalHost - 1)
 m_gr <- lm(data$GrowthRate ~ data$LarvalHost * data$MaternalHost - 1)
-anova_aw <- anova(m_aw)
+m_aw <- lm(data$AdultWeight ~ data$LarvalHost * data$MaternalHost - 1)
 anova_gr <- anova(m_gr)
+anova_aw <- anova(m_aw)
 
 # Save ANOVA output to csv
 write.csv(anova_aw, here("Output", "anova_aw.csv"))
@@ -53,21 +67,27 @@ write.csv(anova_gr, here("Output", "anova_gr.csv"))
 # Pivot data along responses to help with plotting facets
 data_p <- data %>%
   pivot_longer(
-    cols = AdultWeight:GrowthRate, names_to = "Response", values_to = "Value"
+    cols = GrowthRate:AdultWeight, names_to = "Response", values_to = "Value"
   )
 
+# Create dataframe data_summary to contain means of boxes in plot and save
+data_summary <- data_p %>%
+  group_by(LarvalHost, MaternalHost, Response) %>%
+  summarize(mean_response_value = mean(Value))
+write.csv(data_summary, here("Output", "data_summary.csv"))
+
 # Create custom labels for the plot facets
-response.labs <- c("Adult Weight (mg)", "Growth Rate (mg/day)")
-names(response.labs) <- c("AdultWeight", "GrowthRate")
+response.labs <- c("Growth Rate (mg/day)", "Adult Weight (mg)")
+names(response.labs) <- c("GrowthRate", "AdultWeight")
 
 # Plot and save
 data_p %>%
   ggplot(aes(
-    x = factor(LarvalHost, level = c("Berteroa", "Barbarea")), y = Value,
-    fill = MaternalHost
+    x = factor(MaternalHost, level = c("Barbarea", "Berteroa")), y = Value,
+    fill = LarvalHost
   )) +
   geom_boxplot() +
-  labs(x = "Larval Host", y= NULL, fill = "Maternal Host") +
+  labs(x = "Maternal Host", y = NULL, fill = "Larval Host") +
   facet_wrap(
     facets = vars(Response), nrow = 2,
     strip.position = "left",  # Move facet labels left to act as y-axis labels
@@ -75,7 +95,7 @@ data_p %>%
   ) +
   theme(
     strip.background = element_blank(),  # Clear background behind facet labels
-    strip.placement='outside'  # Place labels outside of axis ticks
+    strip.placement = "outside"  # Place labels outside of axis ticks
   )
 ggsave(here("Output", "Fig1.svg"), width = 1100, height = 1100, units = "px")
 ```

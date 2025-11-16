@@ -86,25 +86,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>BIOS15 Exercise 3 Report</h1>
 <section id="oliver-e.-todreas-2025-11-14" class="level3">
 <h3 class="anchored" data-anchor-id="oliver-e.-todreas-2025-11-14"><em>Oliver E. Todreas</em> | <em>2025-11-14</em></h3>
-<p><em>You can view my work in the github repository</em> <a href="https://github.com/otodreas/BIOS15_Exercise-3" class="uri">https://github.com/otodreas/BIOS15_Exercise-3</a>. <em>Consult <code>README.md</code> if you want to reproduce my results.</em></p>
+<p><em>You can view my work in the github repository</em> <a href="https://github.com/otodreas/BIOS15_Exercise-3" class="uri">https://github.com/otodreas/BIOS15_Exercise-3</a>. <em>Consult</em> <code>README.md</code> <em>if you want to reproduce my results.</em></p>
 </section>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Identifying the factors that influence to organism growth are crucial to understanding how conditions in the wild affect ecological outcomes over generations. The aim of this study is to understand conditions that influence the larval growth rates and adult weights of <em>Pieris rapae</em>. In the data we used, mothers reared on one of two different plants, <em>Barbarea</em> and <em>Berteroa</em>, and oviposited on one of those same two plants, after which responses in offspring development were recorded to provide insight into the above issues.</p>
+<p>We used ANOVA to analyze the extent to which the maternal host (the plant on which the mothers reared) and the larval host (the plant on which the mothers oviposited) affect larval growth rates and adult weights of <em>P. rapae</em> individuals.</p>
 </section>
 <section id="statistical-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="statistical-analysis">Statistical Analysis</h2>
+<p>Two two-way ANOVA analyses were performed to investivate the relationship between the two factors (maternal host and larval host). We fitted a linear model to each response variable and both factors, producing one model for the effect of the factors on growth rate and one model for the effect of the factors on adult weight.</p>
 </section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>We found that mean adult weights were higher when <em>Barbarea</em> was the larval host. For individuals with <em>Barbarea</em> larval host, their mean adult weights were 65.4 and 66.7 mg for <em>Barbarea</em> and <em>Berteroa</em> as maternal host, respectively. Meanwhile, individuals with <em>Berteroa</em> as larval host had mean adult weights of 53.5 and 50.4 mg for <em>Barbarea</em> and <em>Berteroa</em> as maternal host, respectively (Figure 1).</p>
+<p>As for growth rates, we observed a similar pattern, where individuals with <em>Barbarea</em> as larval host had the highest mean growth rates, at 0.084 and 0.078 mg/day for <em>Barbarea</em> and <em>Berteroa</em> as maternal host, respectively. Individuals with <em>Berteroa</em> as larval host had mean growth rates of 0.064 and 0.055 mg/day for <em>Barbarea</em> and <em>Berteroa</em> as maternal host, respectively (Figure 1).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Fig1.svg" class="img-fluid figure-img"></p>
-<figcaption><strong>Figure 1.</strong> Figure description</figcaption>
+<figcaption><strong>Figure 1.</strong> For each response variable, means were higher for individuals in the <em>Barbarea</em> larval host group than for the <em>Berteroa</em> larval host group. Additionally, within maternal host groups, mean response was consistently higher for individuals within the <em>Barbarea</em> larval host group than the <em>Berteroa</em> larval host group, with the exeption of mean adult weight of individuals with <em>Barbarea</em> maternal host, where individuals with <em>Berteroa</em> larval host had the higher mean adult weight.</figcaption>
 </figure>
 </div>
+<p>We found the effect of larval host on adult weight to be significant (<em>p</em>&lt;0.001), while the effect of maternal host on adult weight was not significant (<em>p</em>=0.77). The interaction between the two factors was represented by <em>p</em>=0.054. Furthermore, we found the effect of larval host, maternal host, and the interaction of larval and maternal host on growth rate to be significant (<em>p</em>&lt;0.001, <em>p</em>&lt;0.001, <em>p</em>=0.016, respectively).</p>
 </section>
 <section id="conclusions" class="level2">
 <h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<p>Following the statistical analysis presented above, it is clear that the plant a female <em>P. rapae</em> individual choses to oviposit on has a sizable impact on her offspring’s growth rate, and ultimately their adult weight. Statistical analysis using ANOVA showed that it is not only the above effect that has a statistically significant impact on the responses measured, but also the effect of maternal host and the effect of the interaction of larval and maternal host on growth rates.</p>
+<p>The significance of the effect of the interaction of larval and maternal host on adult weight was not below alpha, however, it was quite close at <em>p</em>=0.054. While this cannot be said to be a statistically significant observation, it is obvious that there is quite some interaction happening, and it is indeed possible that the interaction is biologically important, even if a significant <em>p</em>-value was not observed in this case.</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -147,10 +155,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">select</span>(LarvalHost, MaternalHost, AdultWeight, GrowthRate)</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit linear models and perform ANOVA</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>m_aw <span class="ot">&lt;-</span> <span class="fu">lm</span>(data<span class="sc">$</span>AdultWeight <span class="sc">~</span> data<span class="sc">$</span>LarvalHost <span class="sc">*</span> data<span class="sc">$</span>MaternalHost <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>m_gr <span class="ot">&lt;-</span> <span class="fu">lm</span>(data<span class="sc">$</span>GrowthRate <span class="sc">~</span> data<span class="sc">$</span>LarvalHost <span class="sc">*</span> data<span class="sc">$</span>MaternalHost <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>anova_aw <span class="ot">&lt;-</span> <span class="fu">anova</span>(m_aw)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>anova_gr <span class="ot">&lt;-</span> <span class="fu">anova</span>(m_gr)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>m_gr <span class="ot">&lt;-</span> <span class="fu">lm</span>(data<span class="sc">$</span>GrowthRate <span class="sc">~</span> data<span class="sc">$</span>LarvalHost <span class="sc">*</span> data<span class="sc">$</span>MaternalHost <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>m_aw <span class="ot">&lt;-</span> <span class="fu">lm</span>(data<span class="sc">$</span>AdultWeight <span class="sc">~</span> data<span class="sc">$</span>LarvalHost <span class="sc">*</span> data<span class="sc">$</span>MaternalHost <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>anova_gr <span class="ot">&lt;-</span> <span class="fu">anova</span>(m_gr)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>anova_aw <span class="ot">&lt;-</span> <span class="fu">anova</span>(m_aw)</span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Save ANOVA output to csv</span></span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(anova_aw, <span class="fu">here</span>(<span class="st">"Output"</span>, <span class="st">"anova_aw.csv"</span>))</span>
@@ -159,30 +167,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot data along responses to help with plotting facets</span></span>
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>data_p <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
 <span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> AdultWeight<span class="sc">:</span>GrowthRate, <span class="at">names_to =</span> <span class="st">"Response"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> GrowthRate<span class="sc">:</span>AdultWeight, <span class="at">names_to =</span> <span class="st">"Response"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span></span>
 <span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Create custom labels for the plot facets</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>response.labs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Adult Weight (mg)"</span>, <span class="st">"Growth Rate (mg/day)"</span>)</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(response.labs) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"AdultWeight"</span>, <span class="st">"GrowthRate"</span>)</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot and save</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>data_p <span class="sc">%&gt;%</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">factor</span>(LarvalHost, <span class="at">level =</span> <span class="fu">c</span>(<span class="st">"Berteroa"</span>, <span class="st">"Barbarea"</span>)), <span class="at">y =</span> Value,</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> MaternalHost</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Larval Host"</span>, <span class="at">y=</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="st">"Maternal Host"</span>) <span class="sc">+</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">facets =</span> <span class="fu">vars</span>(Response), <span class="at">nrow =</span> <span class="dv">2</span>,</span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.position =</span> <span class="st">"left"</span>,  <span class="co"># Move facet labels left to act as y-axis labels</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">scales =</span> <span class="st">"free_y"</span>, <span class="at">labeller =</span> <span class="fu">labeller</span>(<span class="at">Response =</span> response.labs)</span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),  <span class="co"># Clear background behind facet labels</span></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.placement=</span><span class="st">'outside'</span>  <span class="co"># Place labels outside of axis ticks</span></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Create dataframe data_summary to contain means of boxes in plot and save</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>data_summary <span class="ot">&lt;-</span> data_p <span class="sc">%&gt;%</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(LarvalHost, MaternalHost, Response) <span class="sc">%&gt;%</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_response_value =</span> <span class="fu">mean</span>(Value))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'LarvalHost', 'MaternalHost'. You can
+override using the `.groups` argument.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(data_summary, <span class="fu">here</span>(<span class="st">"Output"</span>, <span class="st">"data_summary.csv"</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create custom labels for the plot facets</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>response.labs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Growth Rate (mg/day)"</span>, <span class="st">"Adult Weight (mg)"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(response.labs) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"GrowthRate"</span>, <span class="st">"AdultWeight"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot and save</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>data_p <span class="sc">%&gt;%</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">factor</span>(MaternalHost, <span class="at">level =</span> <span class="fu">c</span>(<span class="st">"Barbarea"</span>, <span class="st">"Berteroa"</span>)), <span class="at">y =</span> Value,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> LarvalHost</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Maternal Host"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="st">"Larval Host"</span>) <span class="sc">+</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">facets =</span> <span class="fu">vars</span>(Response), <span class="at">nrow =</span> <span class="dv">2</span>,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.position =</span> <span class="st">"left"</span>,  <span class="co"># Move facet labels left to act as y-axis labels</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">scales =</span> <span class="st">"free_y"</span>, <span class="at">labeller =</span> <span class="fu">labeller</span>(<span class="at">Response =</span> response.labs)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),  <span class="co"># Clear background behind facet labels</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.placement =</span> <span class="st">"outside"</span>  <span class="co"># Place labels outside of axis ticks</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -190,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">here</span>(<span class="st">"Output"</span>, <span class="st">"Fig1.svg"</span>), <span class="at">width =</span> <span class="dv">1100</span>, <span class="at">height =</span> <span class="dv">1100</span>, <span class="at">units =</span> <span class="st">"px"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">here</span>(<span class="st">"Output"</span>, <span class="st">"Fig1.svg"</span>), <span class="at">width =</span> <span class="dv">1100</span>, <span class="at">height =</span> <span class="dv">1100</span>, <span class="at">units =</span> <span class="st">"px"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>

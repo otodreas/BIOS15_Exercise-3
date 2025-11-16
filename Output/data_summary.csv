@@ -1,0 +1,9 @@
+"","LarvalHost","MaternalHost","Response","mean_response_value"
+"1","Barbarea","Barbarea","AdultWeight",65.3549019607843
+"2","Barbarea","Barbarea","GrowthRate",0.0837157843137255
+"3","Barbarea","Berteroa","AdultWeight",66.724358974359
+"4","Barbarea","Berteroa","GrowthRate",0.0779382051282051
+"5","Berteroa","Barbarea","AdultWeight",53.5036363636364
+"6","Berteroa","Barbarea","GrowthRate",0.0642249090909091
+"7","Berteroa","Berteroa","AdultWeight",50.3769230769231
+"8","Berteroa","Berteroa","GrowthRate",0.0549138461538462
